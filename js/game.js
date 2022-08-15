@@ -1,7 +1,3 @@
-const boardContainer = document.getElementById("board");
-const board = ONE.board;
-const answer = ONE.answer;
-
 function render() {
     let html = "";
 
@@ -11,8 +7,8 @@ function render() {
         for (let j = 0; j < board[i].length; j++) {
             html += `<div class='column' data-id='col-${j}'>
                         ${board[i][j] != 0 
-                            ? board[i][j] 
-                            : `<input type='text' maxlength='1' class='input-field' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
+                        ? board[i][j] 
+                        : `<input type='text' maxlength='1' class='input-field' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
                     </div>
             `;
         }
@@ -20,16 +16,18 @@ function render() {
         html += "</div>";
     }
 
+    optionContainer.innerHTML = `
+        <button id='backBtn' onclick='onBack()'>&#8592; ${BACK}</button>
+        <button id='nextBtn' onclick='onNext()'>${NEXT} &#8594;</button>
+    `;
     boardContainer.innerHTML = html;
 }
-
-render();
 
 function go(i, j) {
     let input = parseInt(document.getElementById(`input-${i}${j}`).value);
     board[i][j] = input;
 
-    checkAnswer();
+    checkAnswer(board, answer);
 }
 
 function checkAnswer() {
@@ -50,14 +48,14 @@ function checkAnswer() {
     }
 
     if (compare == 0) {
-        resultContainer.innerHTML = "<div>Congratulations! You win</div>";
-    }
-
-    if (checkFullBoard == 0) {
-        resultContainer.innerHTML = "<div>Something wrong! Let's check again</div>";
-        setTimeout(() => {
-            $("#result").fadeOut().empty();
-        }, 3000)
+        resultContainer.innerHTML = RESULT.WIN;
     }
 }
 
+function onBack() {
+    window.location.reload();
+}
+
+function onNext() {
+
+}
