@@ -18,7 +18,7 @@ function render() {
 
     optionContainer.innerHTML = `
         <button id='backBtn' onclick='onBack()'>&#8592; ${BACK}</button>
-        <button id='nextBtn' onclick='onNext()'>${NEXT} &#8594;</button>
+        <button id='nextBtn' onclick='onNext(${game.getLevel()})' disabled>${NEXT} &#8594;</button>
     `;
     boardContainer.innerHTML = html;
 }
@@ -31,7 +31,6 @@ function go(i, j) {
 }
 
 function checkAnswer() {
-    const resultContainer = document.getElementById("result");
     let compare = 0;
     let checkFullBoard = 0;
 
@@ -49,6 +48,8 @@ function checkAnswer() {
 
     if (compare == 0) {
         resultContainer.innerHTML = RESULT.WIN;
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.disabled = false;
     }
 }
 
@@ -56,6 +57,7 @@ function onBack() {
     window.location.reload();
 }
 
-function onNext() {
-
+function onNext(level) {
+    boardContainer.innerHTML = "";
+    resultContainer.innerHTML = "";
 }

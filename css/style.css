@@ -81,10 +81,22 @@ a {
     background-color: green;
 }
 
+#easyBtn:hover {
+    background-color: rgb(4, 138, 4);
+}
+
 #mediumBtn {
     background-color: orange;
 }
 
+#mediumBtn:hover {
+    background-color: rgb(253, 171, 40);
+}
+
 #hardBtn {
     background-color: brown;
+}
+
+#hardBtn:hover {
+    background-color: rgb(178, 47, 47);
 }
