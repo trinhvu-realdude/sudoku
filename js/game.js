@@ -54,10 +54,23 @@ function checkAnswer() {
 }
 
 function onBack() {
+    localStorage.clear();
     window.location.reload();
 }
 
 function onNext(level) {
+    const levels = JSON.parse(localStorage.getItem(level));
+    const random = generateUniqueValue(levels , LEVELS.EASY);
+    console.log(random);
+    localStorage.setItem(level, JSON.stringify(levels));
     boardContainer.innerHTML = "";
     resultContainer.innerHTML = "";
+
+    board = LEVELS.EASY[random].board;
+    answer = LEVELS.EASY[random].answer;
+    render();
+}
+
+function generateUniqueValue(levels, data) {
+    
 }

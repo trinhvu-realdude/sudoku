@@ -6,28 +6,34 @@ const resultContainer = document.getElementById("result");
 
 titleContainer.innerHTML = `<h1>${TITLE}</h1>`;
 
-let board, answer;
+let board,
+    answer;
 
 easyBtn.addEventListener("click", () => {
+    const levels = LEVELS.EASY;
+    const random = Math.floor(Math.random() * levels.length);
+    const easy = new Array();
     buttonContainer.style.display = "none";
     window.game = new Sudoku(EASY);
-    board = EASY_INIT.board;
-    answer = EASY_INIT.answer;
+    board = levels[random].board;
+    answer = levels[random].answer;
+    easy.push(random);
+    localStorage.setItem(EASY, JSON.stringify(easy));
     render();
 });
 
 mediumBtn.addEventListener("click", () => {
     buttonContainer.style.display = "none";
     window.game = new Sudoku(MEDIUM);
-    board = MEDIUM_INIT.board;
-    answer = MEDIUM_INIT.answer;
+    board = LEVELS.MEDIUM.board;
+    answer = LEVELS.MEDIUM.answer;
     render();
 });
 
 hardBtn.addEventListener("click", () => {
     buttonContainer.style.display = "none";
     window.game = new Sudoku(HARD);
-    board = HARD_INIT.board;
-    answer = HARD_INIT.answer;
+    board = LEVELS.HARD.board;
+    answer = LEVELS.HARD.answer;
     render();
 });
