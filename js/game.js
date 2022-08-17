@@ -76,18 +76,18 @@ function onNext() {
     }
 }
 
-function generateUniqueValue(levelArray, data) {
+function generateUniqueValue(levels, data) {
     let check = 0;
     const random = Math.floor(Math.random() * data.length);
-    for (let i = 0; i < levelArray.length; i++) {
-        if (levelArray[i] == random) {
+    for (let i = 0; i < levels.length; i++) {
+        if (levels[i] == random) {
             check++;
         }
     }
     if (check == 0) {
-        levelArray.push(random);
+        levels.push(random);
         return random;  
     } else {
-        return generateUniqueValue(levelArray, data);
+        return generateUniqueValue(levels, data);
     }
 }
