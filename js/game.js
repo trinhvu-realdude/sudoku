@@ -18,7 +18,7 @@ function render() {
 
     optionContainer.innerHTML = `
         <button id='backBtn' onclick='onBack()'>&#8592; ${BACK}</button>
-        <button id='nextBtn' onclick='onNext(${game.getLevel()})' disabled>${NEXT} &#8594;</button>
+        <button id='nextBtn' onclick='onNext()' disabled>${NEXT} &#8594;</button>
     `;
     boardContainer.innerHTML = html;
 }
@@ -58,19 +58,36 @@ function onBack() {
     window.location.reload();
 }
 
-function onNext(level) {
+function onNext() {
+    const data = game.getData();
+    const level = game.getLevel();
     const levels = JSON.parse(localStorage.getItem(level));
-    const random = generateUniqueValue(levels , LEVELS.EASY);
-    console.log(random);
-    localStorage.setItem(level, JSON.stringify(levels));
-    boardContainer.innerHTML = "";
-    resultContainer.innerHTML = "";
 
-    board = LEVELS.EASY[random].board;
-    answer = LEVELS.EASY[random].answer;
-    render();
+    if (levels.length >= data.length) {
+        alert("stop");
+    } else {
+        const random = generateUniqueValue(levels , data);
+        localStorage.setItem(level, JSON.stringify(levels));
+        boardContainer.innerHTML = "";
+        resultContainer.innerHTML = "";
+        board = data[random].board;
+        answer = data[random].answer;
+        render();
+    }
 }
 
-function generateUniqueValue(levels, data) {
-    
+function generateUniqueValue(levelArray, data) {
+    let check = 0;
+    const random = Math.floor(Math.random() * data.length);
+    for (let i = 0; i < levelArray.length; i++) {
+        if (levelArray[i] == random) {
+            check++;
+        }
+    }
+    if (check == 0) {
+        levelArray.push(random);
+        return random;  
+    } else {
+        return generateUniqueValue(levelArray, data);
+    }
 }

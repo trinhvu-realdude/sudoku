@@ -11,29 +11,27 @@ let board,
 
 easyBtn.addEventListener("click", () => {
     const levels = LEVELS.EASY;
-    const random = Math.floor(Math.random() * levels.length);
-    const easy = new Array();
-    buttonContainer.style.display = "none";
-    window.game = new Sudoku(EASY);
-    board = levels[random].board;
-    answer = levels[random].answer;
-    easy.push(random);
-    localStorage.setItem(EASY, JSON.stringify(easy));
-    render();
+    initGame(EASY, levels);
 });
 
 mediumBtn.addEventListener("click", () => {
-    buttonContainer.style.display = "none";
-    window.game = new Sudoku(MEDIUM);
-    board = LEVELS.MEDIUM.board;
-    answer = LEVELS.MEDIUM.answer;
-    render();
+    const levels = LEVELS.MEDIUM;
+    initGame(MEDIUM, levels);
 });
 
 hardBtn.addEventListener("click", () => {
-    buttonContainer.style.display = "none";
-    window.game = new Sudoku(HARD);
-    board = LEVELS.HARD.board;
-    answer = LEVELS.HARD.answer;
-    render();
+    const levels = LEVELS.HARD;
+    initGame(HARD, levels);
 });
+
+function initGame(level, data) {
+    const random = Math.floor(Math.random() * data.length);
+    const levelLocal = new Array();
+    buttonContainer.style.display = "none";
+    window.game = new Sudoku(level, data);
+    board = data[random].board;
+    answer = data[random].answer;
+    levelLocal.push(random);
+    localStorage.setItem(level, JSON.stringify(levelLocal));
+    render();
+}
