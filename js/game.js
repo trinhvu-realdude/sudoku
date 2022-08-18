@@ -8,7 +8,7 @@ function render() {
             html += `<div class='column' data-id='col-${j}'>
                         ${board[i][j] != 0 
                         ? board[i][j] 
-                        : `<input type='text' maxlength='1' class='input-field' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
+                        : `<input type='text' class='input-field' maxlength='1' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
                     </div>
             `;
         }
@@ -21,16 +21,41 @@ function render() {
         <button id='nextBtn' onclick='onNext()' disabled>${NEXT} &#8594;</button>
     `;
     boardContainer.innerHTML = html;
+
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+    
+    $(document).ready(function () {
+        $(".input-field").inputFilter(function (value) {
+            return /^\d*$/.test(value);
+        });
+    });
 }
 
 function go(i, j) {
     let input = parseInt(document.getElementById(`input-${i}${j}`).value);
     board[i][j] = input;
 
-    checkAnswer(board, answer);
+    checkAnswer();
 }
 
 function checkAnswer() {
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = "";
     let compare = 0;
     let checkFullBoard = 0;
 
@@ -47,10 +72,14 @@ function checkAnswer() {
     }
 
     if (compare == 0) {
-        resultContainer.innerHTML = RESULT.WIN;
+        const winResult = document.createElement("div");
+        winResult.className = "win";
+        winResult.innerHTML = WIN;
+        resultContainer.append(winResult);
+
         const nextBtn = document.getElementById("nextBtn");
         nextBtn.disabled = false;
-    }
+    } 
 }
 
 function onBack() {
@@ -62,9 +91,11 @@ function onNext() {
     const data = game.getData();
     const level = game.getLevel();
     const levels = JSON.parse(localStorage.getItem(level));
+    const resultContainer = document.getElementById("result");
 
     if (levels.length >= data.length) {
-        alert("stop");
+        alert("Brilliant! You did it.");
+        onBack();
     } else {
         const random = generateUniqueValue(levels , data);
         localStorage.setItem(level, JSON.stringify(levels));

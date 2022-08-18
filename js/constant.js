@@ -106,9 +106,6 @@ const LEVELS = {
             ]
         }
     ]
-}
+};
 
-const RESULT = {
-    WIN: "Congratulations! You win.",
-    SOMETHING_WRONG: "Something wrong! Let's check again."
-}
+const WIN = "Congratulations! You win.";

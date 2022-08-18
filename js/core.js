@@ -2,7 +2,6 @@ const titleContainer = document.getElementById("title");
 const boardContainer = document.getElementById("board");
 const buttonContainer = document.getElementById("level");
 const optionContainer = document.getElementById("option");
-const resultContainer = document.getElementById("result");
 
 titleContainer.innerHTML = `<h1>${TITLE}</h1>`;
 
