@@ -1,26 +1,10 @@
 function render() {
-    let html = "";
-
-    for (let i = 0; i < board.length; i++) {
-        html += `<div class='row' data-id='row-${i}'>`;
-
-        for (let j = 0; j < board[i].length; j++) {
-            html += `<div class='column' data-id='col-${j}'>
-                        ${board[i][j] != 0 
-                        ? board[i][j] 
-                        : `<input type='text' class='input-field' maxlength='1' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
-                    </div>
-            `;
-        }
-
-        html += "</div>";
-    }
+    boardContainer.innerHTML = generateBoard();
 
     optionContainer.innerHTML = `
         <button id='backBtn' onclick='onBack()'>&#8592; ${BACK}</button>
         <button id='nextBtn' onclick='onNext()' disabled>${NEXT} &#8594;</button>
     `;
-    boardContainer.innerHTML = html;
 
     (function ($) {
         $.fn.inputFilter = function (inputFilter) {
@@ -79,32 +63,53 @@ function checkAnswer() {
 
         const nextBtn = document.getElementById("nextBtn");
         nextBtn.disabled = false;
+        boardContainer.innerHTML = generateBoard();
     } 
 }
 
 function onBack() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
 }
 
 function onNext() {
     const data = game.getData();
     const level = game.getLevel();
-    const levels = JSON.parse(localStorage.getItem(level));
+    const levels = JSON.parse(sessionStorage.getItem(level));
     const resultContainer = document.getElementById("result");
 
     if (levels.length >= data.length) {
-        alert("Brilliant! You did it.");
-        onBack();
+        boardContainer.innerHTML = "";
+        resultContainer.innerHTML = "";
+        boardContainer.innerHTML = `<img src='../image/${level}.gif'/>`;
     } else {
         const random = generateUniqueValue(levels , data);
-        localStorage.setItem(level, JSON.stringify(levels));
+        sessionStorage.setItem(level, JSON.stringify(levels));
         boardContainer.innerHTML = "";
         resultContainer.innerHTML = "";
         board = data[random].board;
         answer = data[random].answer;
         render();
     }
+}
+
+function generateBoard() {
+    let html = "";
+    for (let i = 0; i < board.length; i++) {
+        html += `<div class='row' data-id='row-${i}'>`;
+
+        for (let j = 0; j < board[i].length; j++) {
+            html += `<div class='column' data-id='col-${j}'>
+                        ${board[i][j] != 0 
+                        ? board[i][j] 
+                        : `<input type='text' class='input-field' maxlength='1' id='input-${i}${j}' oninput='go(${i}, ${j})'>`} 
+                    </div>
+            `;
+        }
+
+        html += "</div>";
+    }
+    return html;
 }
 
 function generateUniqueValue(levels, data) {

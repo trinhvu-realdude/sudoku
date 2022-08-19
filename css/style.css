@@ -6,6 +6,11 @@
     width: 100%;
 }
 
+img {
+    width: 500px;
+    height: 300px;
+}
+
 #board,
 #title,
 #result,

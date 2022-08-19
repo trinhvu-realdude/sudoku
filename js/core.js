@@ -1,12 +1,11 @@
-const titleContainer = document.getElementById("title");
 const boardContainer = document.getElementById("board");
 const buttonContainer = document.getElementById("level");
 const optionContainer = document.getElementById("option");
 
-titleContainer.innerHTML = `<h1>${TITLE}</h1>`;
-
 let board,
     answer;
+
+let i = 0;
 
 easyBtn.addEventListener("click", () => {
     const levels = LEVELS.EASY;
@@ -31,6 +30,18 @@ function initGame(level, data) {
     board = data[random].board;
     answer = data[random].answer;
     levelLocal.push(random);
-    localStorage.setItem(level, JSON.stringify(levelLocal));
+    sessionStorage.setItem(level, JSON.stringify(levelLocal));
     render();
 }
+
+function typeWriter() {
+    const heading = document.getElementById("heading");
+    if (i < TITLE.length) {
+        heading.innerHTML += TITLE.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+typeWriter();
+
