@@ -1,11 +1,17 @@
 const boardContainer = document.getElementById("board");
 const buttonContainer = document.getElementById("level");
+const stopWatchContainer = document.getElementById("stopwatch");
+const recordContainer = document.getElementById("record");
 const optionContainer = document.getElementById("option");
 
 let board,
     answer;
 
 let i = 0;
+
+let seconds = -1;
+let secs, mins = 0;
+let interval = null;
 
 easyBtn.addEventListener("click", () => {
     const levels = LEVELS.EASY;
@@ -43,5 +49,22 @@ function typeWriter() {
     }
 }
 
-typeWriter();
 
+function loadRecord() {
+    const record = JSON.parse(localStorage.getItem("RECORD"));
+
+    if (record == null) {
+        recordContainer.innerHTML = "Welcome to Sudoku game!";
+    } else {
+        const minute = parseInt(record.record.minute);
+        const second = parseInt(record.record.second);
+        const level = record.level;
+    
+        recordContainer.innerHTML = minute == 0 
+                                    ? `<span style='font-weight: bold'>#${level}</span> Current record: ${second}s 🚀`
+                                    : `<span style='font-weight: bold'>#${level}</span> Current record: ${minute}m${second}s 🚀`;
+    }
+}
+
+typeWriter();
+loadRecord();

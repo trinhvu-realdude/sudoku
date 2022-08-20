@@ -1,4 +1,6 @@
 * {
+    box-sizing: border-box;
+    /* outline: 1px solid limegreen !important; */
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -14,9 +16,23 @@ img {
 #board,
 #title,
 #result,
+#time,
 #option {
     display: table;
     margin: 0 auto;
+}
+
+#time {
+    padding-bottom: 20px;
+}
+
+#stopwatch {
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: red;
+    color: white;
 }
 
 .row {
@@ -114,14 +130,9 @@ a {
     color: red;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+@media screen and(max-width: 600px) {
+    body {
+        background-color: olive;
+        color: white;
+    }
 }

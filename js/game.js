@@ -6,6 +6,8 @@ function render() {
         <button id='nextBtn' onclick='onNext()' disabled>${NEXT} &#8594;</button>
     `;
 
+    startTimer();
+
     (function ($) {
         $.fn.inputFilter = function (inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
@@ -64,6 +66,20 @@ function checkAnswer() {
         const nextBtn = document.getElementById("nextBtn");
         nextBtn.disabled = false;
         boardContainer.innerHTML = generateBoard();
+
+        const recordLevel = {
+            level: game.getLevel(),
+            record: {
+                minute: mins,
+                second: secs
+            }
+        }
+
+        localStorage.setItem("RECORD", JSON.stringify(recordLevel));
+
+        seconds = -1;
+        clearInterval(interval);
+        interval = null;
     } 
 }
 
@@ -91,6 +107,25 @@ function onNext() {
         answer = data[random].answer;
         render();
     }
+}
+
+function startTimer() {
+    recordContainer.style.display = "none";
+    stopWatchContainer.style.display = "block";
+    seconds++;
+
+    secs = seconds % 60;
+    mins = Math.floor(seconds / 60); 
+
+    if (secs < 10) secs = "0" + secs;
+    if (mins < 10) mins = "0" + mins;
+
+    stopWatchContainer.innerText = `${mins}:${secs}`;
+
+    if (interval) {
+        return;
+    }
+    interval = setInterval(startTimer, 1000);
 }
 
 function generateBoard() {
