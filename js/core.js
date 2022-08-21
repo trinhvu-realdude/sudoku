@@ -51,18 +51,18 @@ function typeWriter() {
 
 
 function loadRecord() {
-    const record = JSON.parse(localStorage.getItem("RECORD"));
+    const record = JSON.parse(localStorage.getItem(RECORD));
 
     if (record == null) {
-        recordContainer.innerHTML = "Welcome to Sudoku game!";
+        recordContainer.innerHTML = WELCOME;
     } else {
         const minute = parseInt(record.record.minute);
         const second = parseInt(record.record.second);
         const level = record.level;
     
         recordContainer.innerHTML = minute == 0 
-                                    ? `<span style='font-weight: bold'>#${level}</span> Current record: ${second}s 🚀`
-                                    : `<span style='font-weight: bold'>#${level}</span> Current record: ${minute}m${second}s 🚀`;
+                                    ? `<span style='font-weight: bold'>#${level}:</span> ${second}s 🚀`
+                                    : `<span style='font-weight: bold'>#${level}:</span> ${minute}m${second}s 🚀`;
     }
 }
 

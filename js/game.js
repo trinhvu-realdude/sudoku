@@ -75,7 +75,7 @@ function checkAnswer() {
             }
         }
 
-        localStorage.setItem("RECORD", JSON.stringify(recordLevel));
+        localStorage.setItem(RECORD, JSON.stringify(recordLevel));
 
         seconds = -1;
         clearInterval(interval);
