@@ -10,7 +10,8 @@ let board,
 let i = 0;
 
 let seconds = -1;
-let secs, mins = 0;
+let secs,
+    mins = 0;
 let interval = null;
 
 easyBtn.addEventListener("click", () => {
@@ -59,10 +60,67 @@ function loadRecord() {
         const minute = parseInt(record.record.minute);
         const second = parseInt(record.record.second);
         const level = record.level;
+        recordContainer.innerHTML = minute == 0 ? `<span style='font-weight: bold'>#${level}:</span> ${second}s 🚀` : `<span style='font-weight: bold'>#${level}:</span> ${minute}m${second}s 🚀`;
+    }
+}
+
+
+function generate(level) {
+    let child;
+    let parent;
+    switch (level) {
+        case EASY:
+            child = 3;
+            parent = 3;
+
+            const childData = new Array(child);
+            const parentData = new Array(parent);
+
+            
+
+            for (let i = 0; i < parentData.length; i++) {
+                
+            }
+            
+            break;
+
+        case MEDIUM:
+            
+            break;
+        
+        case HARD:
+        
+            break;
+
+        default:
+            break;
+    }    
+}
+
+function checkUniqueArray(array) {
+    let check = 0;
+    for (let i = 0; i < array.length; i++) {
+        let temp = array[i];
+        for (let j = array.length - 1; j >= 0; j--) {
+            if (temp != array[j]) {
+                check++;
+            }
+        }
+    }
     
-        recordContainer.innerHTML = minute == 0 
-                                    ? `<span style='font-weight: bold'>#${level}:</span> ${second}s 🚀`
-                                    : `<span style='font-weight: bold'>#${level}:</span> ${minute}m${second}s 🚀`;
+    return check != array.length * 2;
+}
+
+function generateUniqueArray(array, child, parent) {
+    for (let i = 0; i < array.length; i++) {
+        const random = Math.floor(Math.random() * (child * parent)) + 1;
+        array[i] = random;
+    }
+
+    if (!checkUniqueArray(array)) {
+        return array;
+    } else {
+        return generateUniqueArray(array, child, parent);
     }
 }
 
