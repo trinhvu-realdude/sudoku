@@ -70,18 +70,7 @@ function generate(level) {
     let parent;
     switch (level) {
         case EASY:
-            child = 3;
-            parent = 3;
 
-            const childData = new Array(child);
-            const parentData = new Array(parent);
-
-            
-
-            for (let i = 0; i < parentData.length; i++) {
-                
-            }
-            
             break;
 
         case MEDIUM:
