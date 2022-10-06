@@ -26,4 +26,9 @@ function generateElementArray(a) {
     return random;
 }
 
-console.log(JSON.stringify(generate()));
+
+let check = [1,2,3,4];
+let clone = Array.from(check);
+clone[1] = 3;
+console.log(check);
+console.log(clone);

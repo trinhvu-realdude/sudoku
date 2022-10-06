@@ -4,8 +4,8 @@ const stopWatchContainer = document.getElementById("stopwatch");
 const recordContainer = document.getElementById("record");
 const optionContainer = document.getElementById("option");
 
-let board,
-    answer;
+let board;
+let answer;
 
 let i = 0;
 
@@ -15,8 +15,21 @@ let secs,
 let interval = null;
 
 easyBtn.addEventListener("click", () => {
-    const levels = LEVELS.EASY;
-    initGame(EASY, levels);
+    // const levels = LEVELS.EASY;
+
+    // initGame(EASY, levels);
+    answer = generate();
+    let clone = new Array(3);
+    
+    for (let i = 0; i < answer.length; i++) {
+        let inside = [...answer[i]];
+        clone[i] = inside;
+    }
+
+    board = clone;
+    board[1][2] = 0;
+    buttonContainer.style.display = "none";
+    render();
 });
 
 mediumBtn.addEventListener("click", () => {
