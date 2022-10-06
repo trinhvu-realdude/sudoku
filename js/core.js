@@ -64,54 +64,5 @@ function loadRecord() {
     }
 }
 
-
-function generate(level) {
-    let child;
-    let parent;
-    switch (level) {
-        case EASY:
-
-            break;
-
-        case MEDIUM:
-            
-            break;
-        
-        case HARD:
-        
-            break;
-
-        default:
-            break;
-    }    
-}
-
-function checkUniqueArray(array) {
-    let check = 0;
-    for (let i = 0; i < array.length; i++) {
-        let temp = array[i];
-        for (let j = array.length - 1; j >= 0; j--) {
-            if (temp != array[j]) {
-                check++;
-            }
-        }
-    }
-    
-    return check != array.length * 2;
-}
-
-function generateUniqueArray(array, child, parent) {
-    for (let i = 0; i < array.length; i++) {
-        const random = Math.floor(Math.random() * (child * parent)) + 1;
-        array[i] = random;
-    }
-
-    if (!checkUniqueArray(array)) {
-        return array;
-    } else {
-        return generateUniqueArray(array, child, parent);
-    }
-}
-
 typeWriter();
 loadRecord();
