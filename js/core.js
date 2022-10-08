@@ -15,11 +15,23 @@ let secs,
 let interval = null;
 
 easyBtn.addEventListener("click", () => {
-    // const levels = LEVELS.EASY;
+    window.game = new Sudoku(EASY);
+    initGame();
+});
 
-    // initGame(EASY, levels);
-    answer = generate();
+mediumBtn.addEventListener("click", () => {
+    window.game = new Sudoku(MEDIUM);
+    initGame();
+});
+
+hardBtn.addEventListener("click", () => {
+    window.game = new Sudoku(HARD);
+    initGame();
+});
+
+function initGame() {
     let clone = new Array(3);
+    answer = generate();
     
     for (let i = 0; i < answer.length; i++) {
         let inside = [...answer[i]];
@@ -27,30 +39,10 @@ easyBtn.addEventListener("click", () => {
     }
 
     board = clone;
-    board[1][2] = 0;
+    const i = Math.floor(Math.random() * 3);
+    const j = Math.floor(Math.random() * 3);
+    board[i][j] = 0;
     buttonContainer.style.display = "none";
-    render();
-});
-
-mediumBtn.addEventListener("click", () => {
-    const levels = LEVELS.MEDIUM;
-    initGame(MEDIUM, levels);
-});
-
-hardBtn.addEventListener("click", () => {
-    const levels = LEVELS.HARD;
-    initGame(HARD, levels);
-});
-
-function initGame(level, data) {
-    const random = Math.floor(Math.random() * data.length);
-    const levelLocal = new Array();
-    buttonContainer.style.display = "none";
-    window.game = new Sudoku(level, data);
-    board = data[random].board;
-    answer = data[random].answer;
-    levelLocal.push(random);
-    sessionStorage.setItem(level, JSON.stringify(levelLocal));
     render();
 }
 

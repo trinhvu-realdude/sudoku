@@ -1,7 +1,7 @@
 class Sudoku {
-    constructor(level, data) {
+    constructor(level) {
         this.level = level;
-        this.data = data;
+        // this.data = data;
     }
 
     getLevel() {

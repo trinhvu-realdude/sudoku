@@ -1,16 +1,40 @@
 function generate() {
+    switch (game.getLevel()) {
+        case EASY:
+            const boardEasy = [...THREE_X_THREE];
 
-    const board = THREE_X_THREE;
+            for (let i = 0; i < boardEasy.length; i++) {
+                let inside = new Array(3);
+                for (let j = 0; j < inside.length; j++) {
+                    inside[j] = generateElementArray(boardEasy);
+                    boardEasy[i] = inside;
+                }
+            }
+            return boardEasy;
 
-    for (let i = 0; i < board.length; i++) {
-        let inside = new Array(3);
-        for (let j = 0; j < inside.length; j++) {
-            inside[j] = generateElementArray(board);
-            board[i] = inside;
-        }
+        case MEDIUM:
+            const boardMedium = [...SIX_X_SIX];
+            console.log(`boardMedium::: [${boardMedium}]`);
+
+            for (let i = 0; i < boardMedium.length; i++) {
+                let row = new Array(6);
+                
+            }
+            return boardMedium;
+
+        case HARD:
+            const boardHard = [...NINE_X_NINE];
+            console.log(`boardHard::: [${boardHard}]`);
+
+            for (let i = 0; i < boardHard.length; i++) {
+                let row = new Array(9);
+                
+            }
+            return boardHard;
+    
+        default:
+            break;
     }
-
-    return board;
 }
 
 function generateElementArray(a) {
@@ -25,10 +49,3 @@ function generateElementArray(a) {
     }
     return random;
 }
-
-
-let check = [1,2,3,4];
-let clone = Array.from(check);
-clone[1] = 3;
-console.log(check);
-console.log(clone);

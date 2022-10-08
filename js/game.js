@@ -73,7 +73,7 @@ function checkAnswer() {
                 minute: mins,
                 second: secs
             }
-        }
+        };
 
         localStorage.setItem(RECORD, JSON.stringify(recordLevel));
 
@@ -89,24 +89,26 @@ function onBack() {
 }
 
 function onNext() {
-    const data = game.getData();
-    const level = game.getLevel();
-    const levels = JSON.parse(sessionStorage.getItem(level));
-    const resultContainer = document.getElementById("result");
+    // const data = game.getData();
+    // const level = game.getLevel();
+    // const levels = JSON.parse(sessionStorage.getItem(level));
+    // const resultContainer = document.getElementById("result");
 
-    if (levels.length >= data.length) {
-        boardContainer.innerHTML = "";
-        resultContainer.innerHTML = "";
-        boardContainer.innerHTML = `<img src='../image/${level}.gif'/>`;
-    } else {
-        const random = generateUniqueValue(levels , data);
-        sessionStorage.setItem(level, JSON.stringify(levels));
-        boardContainer.innerHTML = "";
-        resultContainer.innerHTML = "";
-        board = data[random].board;
-        answer = data[random].answer;
-        render();
-    }
+    // if (levels.length >= data.length) {
+    //     boardContainer.innerHTML = "";
+    //     resultContainer.innerHTML = "";
+    //     boardContainer.innerHTML = `<img src='../image/${level}.gif'/>`;
+    // } else {
+    //     const random = generateUniqueValue(levels , data);
+    //     sessionStorage.setItem(level, JSON.stringify(levels));
+    //     boardContainer.innerHTML = "";
+    //     resultContainer.innerHTML = "";
+    //     board = data[random].board;
+    //     answer = data[random].answer;
+    //     render();
+    // }
+    document.getElementById("result").innerHTML = "";
+    initGame();
 }
 
 function startTimer() {
@@ -147,18 +149,18 @@ function generateBoard() {
     return html;
 }
 
-function generateUniqueValue(levels, data) {
-    let check = 0;
-    const random = Math.floor(Math.random() * data.length);
-    for (let i = 0; i < levels.length; i++) {
-        if (levels[i] == random) {
-            check++;
-        }
-    }
-    if (check == 0) {
-        levels.push(random);
-        return random;  
-    } else {
-        return generateUniqueValue(levels, data);
-    }
-}
+// function generateUniqueValue(levels, data) {
+//     let check = 0;
+//     const random = Math.floor(Math.random() * data.length);
+//     for (let i = 0; i < levels.length; i++) {
+//         if (levels[i] == random) {
+//             check++;
+//         }
+//     }
+//     if (check == 0) {
+//         levels.push(random);
+//         return random;  
+//     } else {
+//         return generateUniqueValue(levels, data);
+//     }
+// }
