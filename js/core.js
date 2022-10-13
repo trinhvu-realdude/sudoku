@@ -64,28 +64,6 @@ function loadRecord() {
     }
 }
 
-
-function generate(level) {
-    let child;
-    let parent;
-    switch (level) {
-        case EASY:
-
-            break;
-
-        case MEDIUM:
-            
-            break;
-        
-        case HARD:
-        
-            break;
-
-        default:
-            break;
-    }    
-}
-
 function checkUniqueArray(array) {
     let check = 0;
     for (let i = 0; i < array.length; i++) {
