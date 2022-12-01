@@ -139,13 +139,13 @@ const WIN = "Congratulations! You win.";
 const RECORD = "RECORD";
 const WELCOME = "Welcome to Sudoku game!";
 
-const THREE_X_THREE = [
+const THREE_LEVEL = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0]
 ];
 
-const SIX_X_SIX = [
+const SIX_LEVEL= [
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
@@ -154,7 +154,7 @@ const SIX_X_SIX = [
     [0, 0, 0, 0, 0, 0],
 ];
 
-const NINE_X_NINE = [
+const NINE_LEVEL = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
